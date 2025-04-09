@@ -1,5 +1,5 @@
 # LangChain 中的链（Chain）机制总结
-[text](https://python.langchain.com.cn/docs/expression_language/)
+[链机制参考](https://python.langchain.com.cn/docs/expression_language/)
 ## 📌 链式执行的核心理念
 
 链（Chain）是 LangChain 的核心抽象之一，其基本思想是**将多个模块组合成一个序列化的流程**，使得**前一个模块的输出可以直接作为下一个模块的输入**，从而实现类似流水线（pipeline）的处理方式。
