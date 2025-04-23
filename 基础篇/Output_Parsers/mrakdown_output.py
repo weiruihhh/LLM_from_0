@@ -1,0 +1,31 @@
+from langchain.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+from langchain.output_parsers import MarkdownListOutputParser
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+qwen_api_key = os.getenv('QWEN_API_KEY')
+# 加载 llm 模型
+llm = ChatOpenAI(
+    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+    api_key=qwen_api_key,	# app_key # type: ignore
+    model="qwen-plus",	# 模型名称
+    max_completion_tokens=2048,
+    temperature=0,
+)
+#构建markdown解析器
+parser = MarkdownListOutputParser()
+format_instructions = parser.get_format_instructions()
+
+#创建模版
+prompt = ChatPromptTemplate.from_template(
+    "请列出5种最受欢迎的编程语言。\n{format_instructions}"
+)
+
+messages = prompt.format_messages(format_instructions=format_instructions)
+response = llm.invoke(messages)
+
+#解析输出
+parsed_output = parser.parse(response.content)
+print(parsed_output)
