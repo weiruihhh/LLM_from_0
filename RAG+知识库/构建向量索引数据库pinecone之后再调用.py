@@ -13,7 +13,7 @@ qwen_api_key = os.getenv('QWEN_API_KEY')
 # 加载 llm 模型
 llm = ChatOpenAI(
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
-    api_key=qwen_api_key,	# app_key
+    api_key=qwen_api_key,	# app_key # type: ignore
     model="qwen-plus",	# 模型名称
     temperature=0,
 )
@@ -25,7 +25,7 @@ index_name = "langchain-database"
 embeddings = HuggingFaceEmbeddings(model_name='shibing624/text2vec-base-chinese')
 
 # 递归查找加载目录中的所有txt类型的文件
-loader = DirectoryLoader('./知识库/txt_files/', glob='**/*.txt',loader_cls=TextLoader)
+loader = DirectoryLoader('./RAG+知识库/txt_files/', glob='**/*.txt',loader_cls=TextLoader)
 # 将数据转成 document 对象，每个文件会作为一个 document
 documents = loader.load()
 # 初始化加载器
@@ -49,4 +49,4 @@ vectorstore_from_texts = PineconeVectorStore.from_texts(
     index_name=index_name,
     embedding=embeddings
 )
-# print(vectorstore_from_texts)
+print(vectorstore_from_texts)

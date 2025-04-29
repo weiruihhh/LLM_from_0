@@ -20,7 +20,7 @@ llm = ChatOpenAI(
     temperature=0,
 )
 # 递归查找加载目录中的所有txt类型的文件
-loader = DirectoryLoader('./知识库/txt_files/', glob='**/*.txt',loader_cls=TextLoader)
+loader = DirectoryLoader('./RAG+知识库/txt_files/', glob='**/*.txt',loader_cls=TextLoader)
 # 将数据转成 document 对象，每个文件会作为一个 document
 documents = loader.load()
 
